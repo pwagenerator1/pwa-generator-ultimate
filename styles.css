@@ -1,0 +1,47 @@
+body {
+    transition: background 0.3s, color 0.3s;
+}
+
+.light-mode {
+    background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+    color: #2c3e50;
+}
+
+.dark-mode {
+    background: linear-gradient(135deg, #1e2a44, #34495e);
+    color: #ecf0f1;
+}
+
+.container {
+    max-width: 800px;
+    animation: fadeIn 0.5s ease-in;
+}
+
+h1 {
+    font-weight: bold;
+}
+
+.card {
+    background: inherit;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn-primary {
+    transition: transform 0.2s;
+}
+
+.btn-primary:hover {
+    transform: scale(1.05);
+}
+
+pre {
+    background: #2d2d2d;
+    padding: 15px;
+    border-radius: 5px;
+    overflow-x: auto;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}

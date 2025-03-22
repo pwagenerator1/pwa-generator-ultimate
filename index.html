@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PWA Generator Ultimate</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="light-mode">
+    <div class="container mt-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1>PWA Generator Ultimate</h1>
+            <button id="themeToggle" class="btn btn-outline-secondary">Dark Mode</button>
+        </div>
+        <form id="pwaForm">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <input type="text" class="form-control" id="appName" placeholder="App Name" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <input type="text" class="form-control" id="shortName" placeholder="Short Name (max 12 chars)" required>
+                </div>
+            </div>
+            <div class="mb-3">
+                <input type="url" class="form-control" id="siteUrl" placeholder="Website URL (e.g., https://example.com)" required>
+            </div>
+            <div class="mb-3">
+                <select class="form-control" id="displayMode">
+                    <option value="standalone">Standalone</option>
+                    <option value="fullscreen">Fullscreen</option>
+                    <option value="minimal-ui">Minimal UI</option>
+                </select>
+                <label for="displayMode">Display Mode</label>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <input type="color" class="form-control" id="themeColor" value="#007bff">
+                    <label for="themeColor">Theme Color</label>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <input type="color" class="form-control" id="bgColor" value="#ffffff">
+                    <label for="bgColor">Background Color</label>
+                </div>
+            </div>
+            <div class="mb-3">
+                <input type="file" class="form-control" id="iconUpload" accept="image/png">
+                <small>Upload 192x192 PNG icon</small>
+            </div>
+            <div class="mb-3">
+                <textarea class="form-control" id="cacheUrls" rows="2" placeholder="URLs to cache (one per line, e.g., /index.html)"></textarea>
+                <label for="cacheUrls">Cache URLs (optional)</label>
+            </div>
+            <button type="button" class="btn btn-primary w-100" onclick="generatePWA()">Generate PWA</button>
+        </form>
+        <div id="output" class="mt-4" style="display: none;">
+            <h3>Generated Files</h3>
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5>manifest.json <button class="btn btn-sm btn-outline-primary float-end" onclick="copyCode('manifestOutput')">Copy</button></h5>
+                    <pre><code id="manifestOutput" class="language-json"></code></pre>
+                </div>
+            </div>
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5>service-worker.js <button class="btn btn-sm btn-outline-primary float-end" onclick="copyCode('swOutput')">Copy</button></h5>
+                    <pre><code id="swOutput" class="language-javascript"></code></pre>
+                </div>
+            </div>
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5>HTML Snippet <button class="btn btn-sm btn-outline-primary float-end" onclick="copyCode('htmlSnippet')">Copy</button></h5>
+                    <pre><code id="htmlSnippet" class="language-html"></code></pre>
+                </div>
+            </div>
+            <button class="btn btn-success w-100 mb-3" onclick="downloadZip()">Download as Zip</button>
+            <h3>Preview</h3>
+            <iframe id="previewFrame" class="w-100" style="height: 300px; border: 1px solid #ccc;"></iframe>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-json.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-javascript.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

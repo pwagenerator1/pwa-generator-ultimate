@@ -65,21 +65,34 @@ if ('serviceWorker' in navigator) {
     document.getElementById('output').style.display = 'block';
     Prism.highlightAll();
 
+    // Updated Preview Logic
     const previewFrame = document.getElementById('previewFrame');
-    previewFrame.contentDocument.open();
-    previewFrame.contentDocument.write(`
-        <html>
-        <head>
-            <meta name="theme-color" content="${themeColor}">
-            <style>body { background: ${bgColor}; text-align: center; padding: 20px; }</style>
-        </head>
-        <body>
-            <h1>Welcome to ${appName}</h1>
-            <p>This is a preview of your PWA!</p>
-        </body>
-        </html>
-    `);
-    previewFrame.contentDocument.close();
+    try {
+        previewFrame.srcdoc = `
+            <html>
+            <head>
+                <meta name="theme-color" content="${themeColor}">
+                <style>
+                    body {
+                        background: ${bgColor};
+                        text-align: center;
+                        padding: 20px;
+                        font-family: Arial, sans-serif;
+                        color: #333;
+                    }
+                    h1 { margin-bottom: 10px; }
+                </style>
+            </head>
+            <body>
+                <h1>Welcome to ${appName}</h1>
+                <p>This is a preview of your PWA!</p>
+            </body>
+            </html>
+        `;
+    } catch (e) {
+        console.error('Preview failed:', e);
+        previewFrame.srcdoc = '<p>Preview not available</p>';
+    }
 }
 
 function copyCode(elementId) {
